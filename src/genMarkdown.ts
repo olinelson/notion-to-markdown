@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {Client} from '@notionhq/client'
 import {
   DatabasesQueryResponse,
@@ -8,6 +9,7 @@ import {
   Page,
   RichText,
   RichTextPropertyValue,
+  RichTextText,
   TitlePropertyValue
 } from '@notionhq/client/build/src/api-types'
 import fs from 'fs'
@@ -15,13 +17,13 @@ import path from 'path'
 import {GenMarkdownResult} from './types'
 
 function parseRichText(rt: RichText): string {
-  const {annotations, type} = rt
+  const {type} = rt
 
   if (type === 'text') {
-    const content = rt.text.content.trim()
-    const url = rt.text.link?.url
-    const quote =
-      content.substring(0, 1) === '^' ? content.substring(0, 1) : undefined
+    const {annotations, text} = rt as RichTextText
+    const content = text.content.trim()
+    const url = text.link?.url
+    const quote = content.startsWith('^') ? content.substring(0, 1) : undefined
 
     if (url) {
       return `[${content}](${url})`
