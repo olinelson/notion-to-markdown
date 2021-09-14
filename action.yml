@@ -2,10 +2,23 @@ name: 'Notion to markdown'
 description: 'Convert notion files to markdown'
 author: '@olinelson'
 inputs:
-  NOTION_API_KEY: # change this
+  NOTION_API_KEY:
     required: true
   NOTION_DATABASE_ID:
     required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
+
+  - name: commit files
+    run: |
+      git config --local user.email "action@github.com"
+      git config --local user.name "GitHub Action"
+      git add -A
+      git commit -m "generate markdown" -a
+
+  - name: push changes
+    uses: ad-m/github-push-action@v0.6.0
+    with:
+      github_token: ${{ secrets.TOKEN }}
+      branch: master
