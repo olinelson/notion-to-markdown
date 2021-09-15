@@ -144,7 +144,11 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
   }
 
   const fileName = `${parsedProps.Name || 'untitled'}.md`
-  const dirPath = path.join(__dirname, '/src/pages/posts')
+  const dirPath = path.join(__dirname, '/tmp/posts')
+
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, {recursive: true})
+  }
 
   fs.writeFileSync(`${dirPath}/${fileName}`, text)
 

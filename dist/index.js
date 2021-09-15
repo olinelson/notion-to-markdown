@@ -159,7 +159,10 @@ function createMarkdownFile(notion, page) {
             }
         }
         const fileName = `${parsedProps.Name || 'untitled'}.md`;
-        const dirPath = path_1.default.join(__dirname, '/src/pages/posts');
+        const dirPath = path_1.default.join(__dirname, '/tmp/posts');
+        if (!fs_1.default.existsSync(dirPath)) {
+            fs_1.default.mkdirSync(dirPath, { recursive: true });
+        }
         fs_1.default.writeFileSync(`${dirPath}/${fileName}`, text);
         return fileName;
     });
