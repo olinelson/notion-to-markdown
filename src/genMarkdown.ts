@@ -15,7 +15,7 @@ import {
 import fs from 'fs'
 import path from 'path'
 import {GenMarkdownResult} from './types'
-import core from '@actions/core'
+import * as core from '@actions/core'
 
 function parseRichText(rt: RichText): string {
   const {type} = rt

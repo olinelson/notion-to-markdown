@@ -14,6 +14,25 @@ module.exports = JSON.parse('{"name":"@notionhq/client","version":"0.3.2","descr
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32,7 +51,7 @@ exports.genMarkdown = void 0;
 const client_1 = __nccwpck_require__(324);
 const fs_1 = __importDefault(__nccwpck_require__(747));
 const path_1 = __importDefault(__nccwpck_require__(622));
-const core_1 = __importDefault(__nccwpck_require__(186));
+const core = __importStar(__nccwpck_require__(186));
 function parseRichText(rt) {
     var _a;
     const { type } = rt;
@@ -173,7 +192,7 @@ function genMarkdown(notionApiKey, database_id) {
                 success: true,
                 filesCreated
             };
-            core_1.default.debug(JSON.stringify(result, undefined, 2));
+            core.debug(JSON.stringify(result, undefined, 2));
             return result;
         }
         catch (error) {
@@ -182,7 +201,7 @@ function genMarkdown(notionApiKey, database_id) {
                 filesCreated,
                 error
             };
-            core_1.default.error(JSON.stringify(result, undefined, 2));
+            core.error(JSON.stringify(result, undefined, 2));
             return result;
         }
     });
