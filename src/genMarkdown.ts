@@ -15,6 +15,7 @@ import {
 import fs from 'fs'
 import path from 'path'
 import {GenMarkdownResult} from './types'
+import core from '@actions/core'
 
 function parseRichText(rt: RichText): string {
   const {type} = rt
@@ -183,10 +184,12 @@ export async function genMarkdown(
       }
     } while (hasMore)
 
-    return {
+    const result = {
       success: true,
       filesCreated
     }
+    core.debug(JSON.stringify(result, undefined, 2))
+    return result
   } catch (error) {
     return {
       success: false,

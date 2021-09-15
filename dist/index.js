@@ -32,6 +32,7 @@ exports.genMarkdown = void 0;
 const client_1 = __nccwpck_require__(324);
 const fs_1 = __importDefault(__nccwpck_require__(747));
 const path_1 = __importDefault(__nccwpck_require__(622));
+const core_1 = __importDefault(__nccwpck_require__(186));
 function parseRichText(rt) {
     var _a;
     const { type } = rt;
@@ -168,10 +169,12 @@ function genMarkdown(notionApiKey, database_id) {
                     start_cursor = res.next_cursor;
                 }
             } while (hasMore);
-            return {
+            const result = {
                 success: true,
                 filesCreated
             };
+            core_1.default.debug(JSON.stringify(result, undefined, 2));
+            return result;
         }
         catch (error) {
             return {
