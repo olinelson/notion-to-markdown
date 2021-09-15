@@ -177,11 +177,13 @@ function genMarkdown(notionApiKey, database_id) {
             return result;
         }
         catch (error) {
-            return {
+            const result = {
                 success: false,
                 filesCreated,
                 error
             };
+            core_1.default.error(JSON.stringify(result, undefined, 2));
+            return result;
         }
     });
 }

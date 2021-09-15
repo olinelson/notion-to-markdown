@@ -191,10 +191,12 @@ export async function genMarkdown(
     core.debug(JSON.stringify(result, undefined, 2))
     return result
   } catch (error) {
-    return {
+    const result = {
       success: false,
       filesCreated,
       error
     }
+    core.error(JSON.stringify(result, undefined, 2))
+    return result
   }
 }
